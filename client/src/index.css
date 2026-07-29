@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply font-body text-slate-100;
+  background: radial-gradient(1200px 800px at 15% -10%, rgba(109, 93, 252, 0.35), transparent 60%),
+    radial-gradient(1000px 700px at 100% 10%, rgba(34, 211, 201, 0.22), transparent 55%),
+    radial-gradient(900px 600px at 50% 110%, rgba(255, 93, 115, 0.18), transparent 60%),
+    #0A0E27;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(109, 93, 252, 0.4);
+}
+
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 8px; }
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.06] backdrop-blur-xl border border-white/10 shadow-glass rounded-2xl;
+  }
+  .glass-solid {
+    @apply bg-white/[0.09] backdrop-blur-xl border border-white/10 shadow-glass rounded-2xl;
+  }
+  .btn-primary {
+    @apply px-5 py-3 rounded-xl font-display font-semibold text-ink bg-gradient-to-br from-teal to-violet-soft
+      hover:brightness-110 active:scale-[0.98] transition disabled:opacity-40 disabled:pointer-events-none shadow-glow;
+  }
+  .btn-ghost {
+    @apply px-5 py-3 rounded-xl font-display font-semibold text-slate-100 border border-white/15 bg-white/5
+      hover:bg-white/10 active:scale-[0.98] transition disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .btn-danger {
+    @apply px-5 py-3 rounded-xl font-display font-semibold text-white bg-coral/90 hover:bg-coral
+      active:scale-[0.98] transition disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-slate-100 placeholder:text-slate-400
+      focus:outline-none focus:ring-2 focus:ring-teal/60 transition font-body;
+  }
+  .label-eyebrow {
+    @apply text-xs uppercase tracking-[0.25em] text-teal/80 font-mono;
+  }
+}
