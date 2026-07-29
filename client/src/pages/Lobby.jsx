@@ -66,7 +66,7 @@ export default function Lobby({ room, myId }) {
               label="Turn duration"
               value={settings.turnDuration}
               unit="sec"
-              min={15}
+              min={30}
               max={240}
               step={10}
               disabled={!isModerator}

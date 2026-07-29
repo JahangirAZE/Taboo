@@ -1,9 +1,4 @@
-// Curated Taboo word bank. Each entry: the target word, 5 forbidden ("taboo")
-// words that cannot be used while explaining it, a category tag, and a
-// difficulty tier used for controller filtering.
-
 export const WORD_BANK = [
-  // ---------- EASY ----------
   { word: "Birthday", taboo: ["Cake", "Party", "Candle", "Gift", "Age"], category: "Everyday", difficulty: "easy" },
   { word: "Umbrella", taboo: ["Rain", "Water", "Handle", "Wet", "Open"], category: "Objects", difficulty: "easy" },
   { word: "Elephant", taboo: ["Trunk", "Big", "Africa", "Gray", "Animal"], category: "Animals", difficulty: "easy" },
@@ -19,13 +14,32 @@ export const WORD_BANK = [
   { word: "Bicycle", taboo: ["Wheel", "Pedal", "Ride", "Two", "Bike"], category: "Transport", difficulty: "easy" },
   { word: "Library", taboo: ["Book", "Read", "Quiet", "Shelf", "Borrow"], category: "Places", difficulty: "easy" },
   { word: "Sandwich", taboo: ["Bread", "Slice", "Lunch", "Filling", "Cheese"], category: "Food", difficulty: "easy" },
-  { word: "Alarm Clock", taboo: ["Wake", "Time", "Morning", "Ring", "Sleep"], category: "Objects", difficulty: "easy" },
   { word: "Firefighter", taboo: ["Fire", "Truck", "Hose", "Rescue", "Hot"], category: "Jobs", difficulty: "easy" },
   { word: "Beach", taboo: ["Sand", "Ocean", "Sun", "Wave", "Swim"], category: "Places", difficulty: "easy" },
   { word: "Chocolate", taboo: ["Sweet", "Brown", "Candy", "Cocoa", "Bar"], category: "Food", difficulty: "easy" },
   { word: "Basketball", taboo: ["Hoop", "Bounce", "Court", "Ball", "Net"], category: "Sports", difficulty: "easy" },
+  { word: "Dog", taboo: ["Bark", "Pet", "Puppy", "Animal", "Tail"], category: "Animals", difficulty: "easy" },
+  { word: "Cat", taboo: ["Meow", "Pet", "Kitten", "Animal", "Whiskers"], category: "Animals", difficulty: "easy" },
+  { word: "Banana", taboo: ["Yellow", "Fruit", "Peel", "Monkey", "Sweet"], category: "Food", difficulty: "easy" },
+  { word: "Apple", taboo: ["Fruit", "Red", "Tree", "Juice", "Green"], category: "Food", difficulty: "easy" },
+  { word: "Car", taboo: ["Drive", "Wheel", "Road", "Engine", "Vehicle"], category: "Transport", difficulty: "easy" },
+  { word: "Train", taboo: ["Rail", "Station", "Track", "Travel", "Locomotive"], category: "Transport", difficulty: "easy" },
+  { word: "School", taboo: ["Teacher", "Student", "Class", "Study", "Homework"], category: "Places", difficulty: "easy" },
+  { word: "Hospital", taboo: ["Doctor", "Nurse", "Patient", "Medicine", "Sick"], category: "Places", difficulty: "easy" },
+  { word: "Kitchen", taboo: ["Cook", "Food", "Room", "Oven", "Chef"], category: "Places", difficulty: "easy" },
+  { word: "Mirror", taboo: ["Glass", "Reflection", "Face", "Look", "Image"], category: "Objects", difficulty: "easy" },
+  { word: "Telephone", taboo: ["Call", "Phone", "Mobile", "Talk", "Number"], category: "Technology", difficulty: "easy" },
+  { word: "Camera", taboo: ["Photo", "Picture", "Lens", "Take", "Image"], category: "Technology", difficulty: "easy" },
+  { word: "Clock", taboo: ["Time", "Hour", "Minute", "Watch", "Hand"], category: "Objects", difficulty: "easy" },
+  { word: "Pencil", taboo: ["Write", "Paper", "Eraser", "Draw", "School"], category: "Objects", difficulty: "easy" },
+  { word: "Backpack", taboo: ["Bag", "School", "Carry", "Books", "Shoulder"], category: "Objects", difficulty: "easy" },
+  { word: "Football", taboo: ["Ball", "Goal", "Kick", "Field", "Team"], category: "Sports", difficulty: "easy" },
+  { word: "Tennis", taboo: ["Racket", "Ball", "Court", "Serve", "Player"], category: "Sports", difficulty: "easy" },
+  { word: "Swimming", taboo: ["Water", "Pool", "Dive", "Ocean", "Swim"], category: "Sports", difficulty: "easy" },
+  { word: "Coffee", taboo: ["Drink", "Cup", "Hot", "Caffeine", "Morning"], category: "Food", difficulty: "easy" },
+  { word: "Ice-cream", taboo: ["Cold", "Sweet", "Cone", "Dessert", "Scoop"], category: "Food", difficulty: "easy" },
+  { word: "Hamburger", taboo: ["Burger", "Meat", "Bun", "Cheese", "Fast"], category: "Food", difficulty: "easy" },
 
-  // ---------- MEDIUM ----------
   { word: "Gravity", taboo: ["Fall", "Earth", "Weight", "Pull", "Newton"], category: "Science", difficulty: "medium" },
   { word: "Passport", taboo: ["Travel", "Country", "Border", "Document", "Stamp"], category: "Travel", difficulty: "medium" },
   { word: "Marriage", taboo: ["Wedding", "Ring", "Spouse", "Vows", "Couple"], category: "Life", difficulty: "medium" },
@@ -46,13 +60,31 @@ export const WORD_BANK = [
   { word: "Streaming", taboo: ["Video", "Online", "Watch", "Internet", "Netflix"], category: "Modern Life", difficulty: "medium" },
   { word: "Antique", taboo: ["Old", "Vintage", "Valuable", "Furniture", "History"], category: "Objects", difficulty: "medium" },
   { word: "Insomnia", taboo: ["Sleep", "Night", "Awake", "Tired", "Bed"], category: "Health", difficulty: "medium" },
+  { word: "Telescope", taboo: ["Stars", "Space", "Sky", "Lens", "Observe"], category: "Science", difficulty: "medium" },
+  { word: "Earthquake", taboo: ["Ground", "Shake", "Earth", "Damage", "Disaster"], category: "Nature", difficulty: "medium" },
+  { word: "Hurricane", taboo: ["Storm", "Wind", "Rain", "Tropical", "Damage"], category: "Nature", difficulty: "medium" },
+  { word: "Museum", taboo: ["Art", "History", "Exhibit", "Gallery", "Ancient"], category: "Places", difficulty: "medium" },
+  { word: "Architecture", taboo: ["Building", "Design", "Structure", "Engineer", "Construction"], category: "Arts", difficulty: "medium" },
+  { word: "Psychology", taboo: ["Mind", "Behavior", "Brain", "Mental", "Study"], category: "Science", difficulty: "medium" },
+  { word: "Economy", taboo: ["Money", "Market", "Country", "Business", "Finance"], category: "Business", difficulty: "medium" },
+  { word: "Investment", taboo: ["Money", "Stock", "Profit", "Bank", "Return"], category: "Business", difficulty: "medium" },
+  { word: "Marketing", taboo: ["Advertising", "Brand", "Customer", "Product", "Sales"], category: "Business", difficulty: "medium" },
+  { word: "Entrepreneur", taboo: ["Business", "Company", "Founder", "Startup", "Money"], category: "Business", difficulty: "medium" },
+  { word: "Journalist", taboo: ["News", "Newspaper", "Report", "Media", "Article"], category: "Jobs", difficulty: "medium" },
+  { word: "Detective", taboo: ["Police", "Crime", "Clue", "Murder", "Investigate"], category: "Jobs", difficulty: "medium" },
+  { word: "Architect", taboo: ["Building", "Design", "House", "Plan", "Engineer"], category: "Jobs", difficulty: "medium" },
+  { word: "Astronaut", taboo: ["Space", "Rocket", "Moon", "NASA", "Suit"], category: "Jobs", difficulty: "medium" },
+  { word: "Keyboard", taboo: ["Computer", "Keys", "Type", "Mouse", "Letters"], category: "Technology", difficulty: "medium" },
+  { word: "Internet", taboo: ["Online", "Website", "Computer", "Network", "Browser"], category: "Technology", difficulty: "medium" },
+  { word: "Password", taboo: ["Login", "Account", "Secret", "Security", "Username"], category: "Technology", difficulty: "medium" },
+  { word: "Satellite", taboo: ["Space", "Orbit", "Earth", "Signal", "Moon"], category: "Technology", difficulty: "medium" },
+  { word: "Volleyball", taboo: ["Ball", "Net", "Team", "Court", "Serve"], category: "Sports", difficulty: "medium" },
+  { word: "Marathon", taboo: ["Running", "Race", "Long", "Athlete", "Distance"], category: "Sports", difficulty: "medium" },
 
-  // ---------- HARD ----------
   { word: "Nostalgia", taboo: ["Memory", "Past", "Longing", "Remember", "Old"], category: "Emotion", difficulty: "hard" },
   { word: "Bureaucracy", taboo: ["Government", "Rules", "Paperwork", "Office", "Process"], category: "Society", difficulty: "hard" },
   { word: "Serendipity", taboo: ["Luck", "Accident", "Chance", "Discover", "Unexpected"], category: "Abstract", difficulty: "hard" },
   { word: "Inflation", taboo: ["Price", "Economy", "Money", "Rise", "Currency"], category: "Economy", difficulty: "hard" },
-  { word: "Existential Crisis", taboo: ["Meaning", "Life", "Purpose", "Question", "Doubt"], category: "Abstract", difficulty: "hard" },
   { word: "Algorithm", taboo: ["Computer", "Steps", "Code", "Instructions", "Program"], category: "Technology", difficulty: "hard" },
   { word: "Procrastination", taboo: ["Delay", "Later", "Avoid", "Task", "Lazy"], category: "Behavior", difficulty: "hard" },
   { word: "Renaissance", taboo: ["Art", "Europe", "History", "Rebirth", "Painting"], category: "History", difficulty: "hard" },
@@ -62,12 +94,30 @@ export const WORD_BANK = [
   { word: "Sarcasm", taboo: ["Joke", "Mean", "Tone", "Irony", "Opposite"], category: "Language", difficulty: "hard" },
   { word: "Monopoly", taboo: ["Game", "Control", "Market", "Company", "Only"], category: "Economy", difficulty: "hard" },
   { word: "Paradox", taboo: ["Contradiction", "Logic", "Confusing", "Statement", "True"], category: "Abstract", difficulty: "hard" },
-  { word: "Deja Vu", taboo: ["Feeling", "Before", "Memory", "Familiar", "Already"], category: "Abstract", difficulty: "hard" },
   { word: "Censorship", taboo: ["Ban", "Government", "Speech", "Control", "Media"], category: "Society", difficulty: "hard" },
-  { word: "Artificial Intelligence", taboo: ["Robot", "Computer", "Smart", "Machine", "Learn"], category: "Technology", difficulty: "hard" },
   { word: "Introvert", taboo: ["Shy", "Alone", "Quiet", "Social", "Personality"], category: "Personality", difficulty: "hard" },
-  { word: "Climate Change", taboo: ["Warming", "Earth", "Weather", "Carbon", "Temperature"], category: "Environment", difficulty: "hard" },
   { word: "Diplomacy", taboo: ["Countries", "Talk", "Peace", "Negotiate", "Politics"], category: "Society", difficulty: "hard" },
+  { word: "Philosophy", taboo: ["Life", "Thinking", "Ideas", "Wisdom", "Question"], category: "Abstract", difficulty: "hard" },
+  { word: "Democracy", taboo: ["Vote", "Government", "Election", "People", "Rights"], category: "Society", difficulty: "hard" },
+  { word: "Capitalism", taboo: ["Market", "Money", "Business", "Profit", "Private"], category: "Economy", difficulty: "hard" },
+  { word: "Socialism", taboo: ["Government", "Workers", "Equality", "Economy", "Collective"], category: "Society", difficulty: "hard" },
+  { word: "Psychiatry", taboo: ["Mental", "Doctor", "Brain", "Therapy", "Medicine"], category: "Science", difficulty: "hard" },
+  { word: "Genetics", taboo: ["DNA", "Genes", "Biology", "Family", "Heredity"], category: "Science", difficulty: "hard" },
+  { word: "Evolution", taboo: ["Darwin", "Species", "Change", "Animals", "Natural"], category: "Science", difficulty: "hard" },
+  { word: "Quantum", taboo: ["Physics", "Particle", "Energy", "Science", "Small"], category: "Science", difficulty: "hard" },
+  { word: "Relativity", taboo: ["Einstein", "Physics", "Time", "Space", "Theory"], category: "Science", difficulty: "hard" },
+  { word: "Gravity", taboo: ["Earth", "Force", "Fall", "Weight", "Newton"], category: "Science", difficulty: "hard" },
+  { word: "Demographic", taboo: ["Population", "People", "Statistics", "Age", "Country"], category: "Society", difficulty: "hard" },
+  { word: "Diplomat", taboo: ["Country", "Politics", "Embassy", "Negotiation", "Foreign"], category: "Jobs", difficulty: "hard" },
+  { word: "Journalism", taboo: ["News", "Media", "Report", "Newspaper", "Journalist"], category: "Society", difficulty: "hard" },
+  { word: "Propaganda", taboo: ["Government", "Media", "Information", "Political", "Influence"], category: "Society", difficulty: "hard" },
+  { word: "Manipulation", taboo: ["Control", "Influence", "Person", "Psychology", "Deceive"], category: "Behavior", difficulty: "hard" },
+  { word: "Hypocrisy", taboo: ["Fake", "Behavior", "Truth", "Double", "Moral"], category: "Behavior", difficulty: "hard" },
+  { word: "Ambition", taboo: ["Goal", "Success", "Dream", "Career", "Achieve"], category: "Emotion", difficulty: "hard" },
+  { word: "Jealousy", taboo: ["Envy", "Green", "Love", "Possessive", "Emotion"], category: "Emotion", difficulty: "hard" },
+  { word: "Anxiety", taboo: ["Worry", "Fear", "Stress", "Nervous", "Mental"], category: "Emotion", difficulty: "hard" },
+  { word: "Curiosity", taboo: ["Question", "Learn", "Interest", "Explore", "Knowledge"], category: "Emotion", difficulty: "hard" },
+  { word: "Conspiracy", taboo: ["Secret", "Theory", "Government", "Plan", "Hidden"], category: "Abstract", difficulty: "hard" },
 ];
 
 export function getRandomWord(difficulty = "mixed", excludeWords = []) {
@@ -78,5 +128,6 @@ export function getRandomWord(difficulty = "mixed", excludeWords = []) {
 
   const fresh = pool.filter((entry) => !excludeWords.includes(entry.word));
   const finalPool = fresh.length > 0 ? fresh : pool;
+
   return finalPool[Math.floor(Math.random() * finalPool.length)];
 }
