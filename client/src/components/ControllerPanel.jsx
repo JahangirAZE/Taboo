@@ -83,7 +83,7 @@ export default function ControllerPanel({ room, controllerWord }) {
                   value={draftWord}
                   onChange={(e) => setDraftWord(e.target.value)}
                   placeholder="Enter your own word"
-                  maxLength={60}
+                  maxLength={20}
                   autoFocus
                   className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2.5 font-display font-bold text-lg text-center mb-4 focus:outline-none focus:border-violet-soft/60"
               />
@@ -100,7 +100,7 @@ export default function ControllerPanel({ room, controllerWord }) {
                           value={t}
                           onChange={(e) => updateTabooAt(i, e.target.value)}
                           placeholder={`Taboo word ${i + 1}`}
-                          maxLength={40}
+                          maxLength={20}
                           className="flex-1 min-w-0 rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-coral/60"
                       />
                       <button

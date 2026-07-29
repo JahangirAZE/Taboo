@@ -42,7 +42,7 @@ export default function GuesserPanel({ room, explainerName }) {
               placeholder="Type the word…"
               value={guess}
               disabled={!isActive}
-              maxLength={40}
+              maxLength={20}
               onChange={(e) => setGuess(e.target.value)}
               autoFocus
           />
