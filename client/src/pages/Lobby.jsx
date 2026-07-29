@@ -67,8 +67,8 @@ export default function Lobby({ room, myId }) {
               value={settings.turnDuration}
               unit="sec"
               min={15}
-              max={180}
-              step={5}
+              max={240}
+              step={10}
               disabled={!isModerator}
               onChange={(v) => pushSettings({ turnDuration: v })}
             />
@@ -76,7 +76,7 @@ export default function Lobby({ room, myId }) {
               label="Max players"
               value={settings.maxPlayers}
               min={3}
-              max={20}
+              max={10}
               step={1}
               disabled={!isModerator}
               onChange={(v) => pushSettings({ maxPlayers: v })}
@@ -85,7 +85,7 @@ export default function Lobby({ room, myId }) {
               label="Points to win"
               value={settings.targetScore}
               min={5}
-              max={50}
+              max={20}
               step={1}
               disabled={!isModerator}
               onChange={(v) => pushSettings({ targetScore: v })}

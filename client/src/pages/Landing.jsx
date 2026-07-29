@@ -74,7 +74,7 @@ export default function Landing({ onJoined }) {
               className="input-field"
               placeholder="e.g. Leyla"
               value={name}
-              maxLength={20}
+              maxLength={10}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
