@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
     if (room.status !== "lobby") {
       // Allow reconnecting mid-game if the name matches an existing player.
       const existing = room.players.find(
-        (p) => p.name.toLowerCase() === name?.trim().toLowerCase()
+          (p) => p.name.toLowerCase() === name?.trim().toLowerCase()
       );
       if (existing) {
         existing.id = socket.id;
@@ -99,7 +99,12 @@ io.on("connection", (socket) => {
     const room = getRoomOrFail(socket, code);
     if (!room) return;
     const roles = room.getRoles();
-    if (roles && roles.controller.id === socket.id) {
+    if (!roles) return;
+    // Controller can always see the word while it's their turn to hold it.
+    if (roles.controller.id === socket.id) {
+      socket.emit("controllerWord", room.toControllerState());
+    } else if (roles.explainer.id === socket.id && room.status === "active") {
+      // Explainer only gets to see it once the turn is actually live.
       socket.emit("controllerWord", room.toControllerState());
     }
   });
@@ -119,6 +124,8 @@ io.on("connection", (socket) => {
     const roles = room.getRoles();
     if (!roles || roles.controller.id !== socket.id) return;
     room.beginTurn(io);
+    sendControllerWord(room);
+    sendExplainerWord(room);
     io.to(code).emit("roomUpdate", room.toPublicState());
   });
 
@@ -175,6 +182,14 @@ function sendControllerWord(room) {
   const roles = room.getRoles();
   if (!roles) return;
   io.to(roles.controller.id).emit("controllerWord", room.toControllerState());
+}
+
+// Once the turn actually goes live, the explainer also needs to see the
+// word and taboo list (only the controller sees it during setup/shuffling).
+function sendExplainerWord(room) {
+  const roles = room.getRoles();
+  if (!roles) return;
+  io.to(roles.explainer.id).emit("controllerWord", room.toControllerState());
 }
 
 httpServer.listen(PORT, () => {
