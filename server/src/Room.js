@@ -10,9 +10,9 @@ const DEFAULT_SETTINGS = {
 
 function normalize(str) {
   return String(str || "")
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9 ]/g, "");
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9 ]/g, "");
 }
 
 // Cheap Levenshtein distance, capped, to forgive small typos on guesses.
@@ -25,9 +25,9 @@ function levenshtein(a, b) {
   for (let i = 1; i <= m; i++) {
     for (let j = 1; j <= n; j++) {
       dp[i][j] =
-        a[i - 1] === b[j - 1]
-          ? dp[i - 1][j - 1]
-          : 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
+          a[i - 1] === b[j - 1]
+              ? dp[i - 1][j - 1]
+              : 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
     }
   }
   return dp[m][n];
@@ -92,7 +92,7 @@ export class Room {
     const explainer = active[this.turnIndex % n];
     const controller = active[(this.turnIndex + 1) % n];
     const guessers = active.filter(
-      (p) => p.id !== explainer.id && p.id !== controller.id
+        (p) => p.id !== explainer.id && p.id !== controller.id
     );
     return { explainer, controller, guessers };
   }
@@ -118,6 +118,30 @@ export class Room {
 
   shuffleWord(difficultyOverride) {
     this._drawWord(difficultyOverride);
+  }
+
+  // Lets the controller fully override the suggested word/taboo list with
+  // their own text, as long as the turn hasn't started yet.
+  setCustomWord({ word, taboo }) {
+    if (this.status !== "setup") return false;
+    const cleanWord = String(word || "").trim().slice(0, 60);
+    if (!cleanWord) return false;
+
+    const cleanTaboo = Array.from(
+        new Set(
+            (Array.isArray(taboo) ? taboo : [])
+                .map((t) => String(t || "").trim().slice(0, 40))
+                .filter(Boolean)
+        )
+    ).slice(0, 8);
+
+    this.currentEntry = {
+      word: cleanWord,
+      taboo: cleanTaboo,
+      category: "Custom",
+      difficulty: this.currentEntry?.difficulty || this.settings.difficulty,
+    };
+    return true;
   }
 
   beginTurn(io) {
@@ -188,7 +212,7 @@ export class Room {
     if (this.log.length > 15) this.log.pop();
 
     const winner = this.players.find(
-      (p) => p.scoreExplained + p.scoreFound >= this.settings.targetScore
+        (p) => p.scoreExplained + p.scoreFound >= this.settings.targetScore
     );
 
     io.to(this.code).emit("turnEnded", {
@@ -230,18 +254,18 @@ export class Room {
         total: p.scoreExplained + p.scoreFound,
       })),
       roles: roles
-        ? {
+          ? {
             explainerId: roles.explainer.id,
             explainerName: roles.explainer.name,
             controllerId: roles.controller.id,
             controllerName: roles.controller.name,
             guesserIds: roles.guessers.map((g) => g.id),
           }
-        : null,
+          : null,
       timeLeft: this.timeLeft,
       wordMeta: this.currentEntry
-        ? { category: this.currentEntry.category, difficulty: this.currentEntry.difficulty }
-        : null,
+          ? { category: this.currentEntry.category, difficulty: this.currentEntry.difficulty }
+          : null,
       log: this.log,
       winnerId: this.winnerId,
     };
@@ -249,13 +273,13 @@ export class Room {
 
   toControllerState() {
     return this.currentEntry
-      ? {
+        ? {
           word: this.currentEntry.word,
           taboo: this.currentEntry.taboo,
           category: this.currentEntry.category,
           difficulty: this.currentEntry.difficulty,
         }
-      : null;
+        : null;
   }
 }
 

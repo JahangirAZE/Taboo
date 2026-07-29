@@ -118,6 +118,19 @@ io.on("connection", (socket) => {
     sendControllerWord(room);
   });
 
+  socket.on("customizeWord", ({ code, word, taboo }) => {
+    const room = getRoomOrFail(socket, code);
+    if (!room || room.status !== "setup") return;
+    const roles = room.getRoles();
+    if (!roles || roles.controller.id !== socket.id) return;
+    const ok = room.setCustomWord({ word, taboo });
+    if (!ok) {
+      return socket.emit("errorMessage", "Enter a word before saving your custom card.");
+    }
+    sendControllerWord(room);
+    io.to(code).emit("roomUpdate", room.toPublicState());
+  });
+
   socket.on("beginTurn", ({ code }) => {
     const room = getRoomOrFail(socket, code);
     if (!room || room.status !== "setup") return;
