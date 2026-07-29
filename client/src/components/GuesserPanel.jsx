@@ -27,28 +27,29 @@ export default function GuesserPanel({ room, explainerName }) {
   }
 
   return (
-    <GlassCard solid className="w-full text-center">
-      <span className="label-eyebrow text-gold/80">You're guessing</span>
-      <h3 className="font-display text-2xl font-bold mt-2 mb-5">
-        {isActive
-          ? `Listen to ${explainerName} and type your guess`
-          : `Waiting for ${explainerName}'s controller to start the turn…`}
-      </h3>
-      <form onSubmit={submit} className="flex gap-3">
-        <input
-          className={`input-field text-center text-lg font-medium ${
-            shake ? "animate-pulseRing ring-2 ring-coral" : ""
-          }`}
-          placeholder="Type the word…"
-          value={guess}
-          disabled={!isActive}
-          onChange={(e) => setGuess(e.target.value)}
-          autoFocus
-        />
-        <button type="submit" disabled={!isActive} className="btn-primary shrink-0">
-          Submit
-        </button>
-      </form>
-    </GlassCard>
+      <GlassCard solid className="w-full text-center">
+        <span className="label-eyebrow text-gold/80">You're guessing</span>
+        <h3 className="font-display text-2xl font-bold mt-2 mb-5">
+          {isActive
+              ? `Listen to ${explainerName} and type your guess`
+              : `Waiting for ${explainerName}'s controller to start the turn…`}
+        </h3>
+        <form onSubmit={submit} className="flex gap-3">
+          <input
+              className={`input-field text-center text-lg font-medium ${
+                  shake ? "animate-pulseRing ring-2 ring-coral" : ""
+              }`}
+              placeholder="Type the word…"
+              value={guess}
+              disabled={!isActive}
+              maxLength={40}
+              onChange={(e) => setGuess(e.target.value)}
+              autoFocus
+          />
+          <button type="submit" disabled={!isActive} className="btn-primary shrink-0">
+            Submit
+          </button>
+        </form>
+      </GlassCard>
   );
 }

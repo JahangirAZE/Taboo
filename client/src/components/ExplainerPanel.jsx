@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { socket } from "../socket";
 import GlassCard from "./GlassCard.jsx";
 
@@ -6,12 +6,27 @@ export default function ExplainerPanel({ room, controllerWord }) {
     const isSetup = room.status === "setup";
     const isActive = room.status === "active";
 
+    const [guessLog, setGuessLog] = useState([]);
+
     useEffect(() => {
         // In case the word push was missed (e.g. late join/reconnect mid-turn), ask for it.
         if (isActive && !controllerWord) {
             socket.emit("requestControllerWord", { code: room.code });
         }
     }, [room.status]);
+
+    // Fresh log every turn — clear out whenever we're not mid-turn.
+    useEffect(() => {
+        if (!isActive) setGuessLog([]);
+    }, [isActive]);
+
+    useEffect(() => {
+        function onGuessAttempt(entry) {
+            setGuessLog((prev) => [entry, ...prev].slice(0, 20));
+        }
+        socket.on("guessAttempt", onGuessAttempt);
+        return () => socket.off("guessAttempt", onGuessAttempt);
+    }, []);
 
     return (
         <GlassCard solid className="w-full text-center">
@@ -51,6 +66,39 @@ export default function ExplainerPanel({ room, controllerWord }) {
                     Category hint: {room.wordMeta.category} · {room.wordMeta.difficulty}
                 </p>
             )}
+
+            {isActive && (
+                <div className="mt-4 text-left">
+                    <span className="label-eyebrow text-slate-400">Guesses so far</span>
+                    <div className="mt-2 h-40 overflow-y-auto rounded-xl border border-white/10 bg-black/10 px-3 py-2 space-y-1.5">
+                        {guessLog.length === 0 ? (
+                            <p className="text-slate-500 text-xs text-center mt-3">
+                                Guesses will show up here as they come in…
+                            </p>
+                        ) : (
+                            guessLog.map((g, i) => (
+                                <div
+                                    key={`${g.at}-${i}`}
+                                    className={`flex items-center gap-2 text-sm rounded-lg px-2 py-1.5 ${
+                                        g.correct
+                                            ? "bg-teal-soft/10 text-teal-soft"
+                                            : "bg-white/[0.03] text-slate-300"
+                                    }`}
+                                >
+                                    <span className="shrink-0">{g.correct ? "✅" : "❌"}</span>
+                                    <span className="font-semibold shrink-0 truncate max-w-[35%]">
+                    {g.guesserName}
+                  </span>
+                                    <span className="truncate flex-1 text-slate-400">
+                    {g.guess}
+                  </span>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+            )}
+
             <p className="text-slate-500 text-xs mt-4">
                 Don't say the word or any of the taboo words out loud — everyone else
                 is racing to guess it.

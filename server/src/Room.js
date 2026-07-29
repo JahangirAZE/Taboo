@@ -154,7 +154,7 @@ export class Room {
       this.timeLeft -= 1;
       if (this.timeLeft <= 0) {
         clearInterval(this.timer);
-        this._endTurn(io, { reason: "timeup" });
+        this._endTurn(io, { reason: "time_up", word: this.currentEntry?.word });
       } else {
         io.to(this.code).emit("timer", { timeLeft: this.timeLeft });
       }
@@ -168,13 +168,26 @@ export class Room {
     // Only guessers may submit guesses.
     if (!roles.guessers.find((p) => p.id === guesserId)) return null;
 
+    const trimmedRaw = String(rawGuess || "").trim();
+    if (!trimmedRaw) return null;
+
     const guess = normalize(rawGuess);
     const target = normalize(this.currentEntry.word);
     const distance = levenshtein(guess, target);
     const isCorrect = guess.length > 0 && (guess === target || distance <= 1);
+    const guesser = this.players.find((p) => p.id === guesserId);
+
+    // Let the explainer see a live feed of what's being guessed. Guessers
+    // don't get each other's attempts, so nobody can piggyback off others.
+    io.to(roles.explainer.id).emit("guessAttempt", {
+      guesserId,
+      guesserName: guesser?.name || "Someone",
+      guess: trimmedRaw.slice(0, 60),
+      correct: isCorrect,
+      at: Date.now(),
+    });
 
     if (isCorrect) {
-      const guesser = this.players.find((p) => p.id === guesserId);
       const explainer = this.players.find((p) => p.id === roles.explainer.id);
       guesser.scoreFound += 1;
       explainer.scoreExplained += 1;
