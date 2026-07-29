@@ -9,6 +9,7 @@ export default function ControllerPanel({ room, controllerWord }) {
   const [editing, setEditing] = useState(false);
   const [draftWord, setDraftWord] = useState("");
   const [draftTaboo, setDraftTaboo] = useState([""]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(room.settings?.difficulty || "mixed");
 
   useEffect(() => {
     // In case a controllerWord push was missed (e.g. late join), ask for it.
@@ -165,15 +166,19 @@ export default function ControllerPanel({ room, controllerWord }) {
                 {["easy", "medium", "hard", "mixed"].map((d) => (
                     <button
                         key={d}
-                        onClick={() => shuffle(d)}
-                        className="py-2 rounded-lg text-xs font-display font-semibold capitalize bg-white/5 border border-white/10 hover:bg-white/10 transition"
+                        onClick={() => setSelectedDifficulty(d)}
+                        className={`py-2 rounded-lg text-xs font-display font-semibold capitalize border transition ${
+                            selectedDifficulty === d
+                                ? "bg-violet-soft/20 border-violet-soft/60 text-white"
+                                : "bg-white/5 border-white/10 hover:bg-white/10"
+                        }`}
                     >
                       {d}
                     </button>
                 ))}
               </div>
               <div className="flex gap-3">
-                <button onClick={() => shuffle()} className="btn-ghost flex-1">
+                <button onClick={() => shuffle(selectedDifficulty)} className="btn-ghost flex-1">
                   🔀 Shuffle word
                 </button>
                 <button onClick={startEditing} className="btn-ghost flex-1">
