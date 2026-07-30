@@ -15,22 +15,39 @@ function normalize(str) {
       .replace(/[^a-z0-9 ]/g, "");
 }
 
-// Cheap Levenshtein distance, capped, to forgive small typos on guesses.
-function levenshtein(a, b) {
+// Inexpensive Levenshtein distance, capped, to forgive small typos on guesses.
+function levenshtein(a, b, maxDistance = 3) {
   const m = a.length;
   const n = b.length;
-  if (Math.abs(m - n) > 2) return 99;
+
+  if (Math.abs(m - n) > maxDistance) {
+    return maxDistance + 1;
+  }
+
   const dp = Array.from({ length: m + 1 }, (_, i) => [i, ...Array(n).fill(0)]);
-  for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+  for (let j = 0; j <= n; j++) {
+    dp[0][j] = j;
+  }
+
   for (let i = 1; i <= m; i++) {
     for (let j = 1; j <= n; j++) {
-      dp[i][j] =
-          a[i - 1] === b[j - 1]
-              ? dp[i - 1][j - 1]
-              : 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
+      dp[i][j] = a[i - 1] === b[j - 1]
+          ? dp[i - 1][j - 1]
+          : 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
     }
   }
   return dp[m][n];
+}
+
+// Longer words get more typo tolerance; short words stay strict so
+// unrelated-but-similar words aren't accepted as correct.
+function allowedTypoDistance(word) {
+  const len = word.length;
+  if (len <= 4) return 0;
+  if (len <= 7) return 2;
+  if (len <= 11) return 3;
+  return 4;
 }
 
 export class Room {
@@ -173,8 +190,10 @@ export class Room {
 
     const guess = normalize(rawGuess);
     const target = normalize(this.currentEntry.word);
-    const distance = levenshtein(guess, target);
-    const isCorrect = guess.length > 0 && (guess === target || distance <= 1);
+    const maxDistance = allowedTypoDistance(target);
+    const distance = levenshtein(guess, target, maxDistance);
+    const isCorrect = guess.length > 0 && (guess === target || distance <= maxDistance);
+
     const guesser = this.players.find((p) => p.id === guesserId);
 
     // Let the explainer see a live feed of what's being guessed. Guessers
